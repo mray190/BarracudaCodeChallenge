@@ -4,6 +4,7 @@
  */
 package com.barracuda.contest2014;
 
+import com.barracuda.visualize.TerminalPrinter;
 import java.io.IOException;
 
 public class ContestBot {
@@ -13,6 +14,8 @@ public class ContestBot {
 	private final int port;
 	private int game_id = -1;
 
+        private static final TerminalPrinter printer = new TerminalPrinter();
+        
 	public ContestBot(String host, int port) {
 		this.host = host;
 		this.port = port;
@@ -63,6 +66,8 @@ public class ContestBot {
 			MoveRequestMessage m = (MoveRequestMessage)message;
 			//System.out.println(m);
 
+                        printer.printDetails(m.state.board);
+                        
 			if (game_id != m.game_id) {
 				game_id = m.game_id;
 				System.out.println("new game " + game_id);

@@ -17,5 +17,4 @@ public class TerminalPrinter extends Printer<Void> {
         printer.print(grid, details);
         return null;
     }
-    
 }
