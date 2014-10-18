@@ -54,6 +54,10 @@ public class Board {
     public ArrayList<Layer> getBoard() {
         return layers;
     }
+    
+    public int[][][] getRawGrid() { 
+        return game.board; 
+    }
     //--------------------------------------------------------------------------
 
     //Game State Information
@@ -113,7 +117,7 @@ public class Board {
             tokens = game.tokens;
         }
         else{
-            tokens = game.opponent_tokens + game.player;
+            tokens = game.opponent_tokens;
         }
         
         //Iterate

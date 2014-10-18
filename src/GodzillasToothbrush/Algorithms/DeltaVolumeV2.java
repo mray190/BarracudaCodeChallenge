@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Aaron
  */
-public class DeltaVolume extends Algorithm{
+public class DeltaVolumeV2 extends Algorithm{
 
     @Override
     public Point makeMove(Board current, Board previous) {
