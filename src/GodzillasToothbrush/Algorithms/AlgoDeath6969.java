@@ -14,9 +14,47 @@ import java.util.ArrayList;
  * @author shane
  */
 public class AlgoDeath6969 extends Algorithm {
+    
+    boolean fuckedEm, waited, powerPlayed;
+    
+    public AlgoDeath6969() {
+        fuckedEm = false;
+        waited = false;
+        powerPlayed = false;
+    }
+    
     @Override
     public Point makeMove(Board current, Board previous) {
-        return null;
+        Point result = null;
+        if(fuckedEm) {
+            if(waited) {
+                if(powerPlayed) {
+                    //We already won, just dick around from here on out
+                    if(current.getPlayerTokens() == 0) return null;
+                    result = AlgorithmHelper.highestScore(current.getLegalMoves());
+                }
+                else {
+                    //Power Play
+                    result = findBiggestTriangle(current, current.getPlayerNum(), current.getPlayerTokens());
+                    powerPlayed = true;
+                }
+            }
+            else {
+                //Wait
+                if(current.getPlayerTokens() == 5) {
+                    waited = true;
+                }
+            }
+        }
+        else {
+            //Go fuck em
+            Point currentPoint = findStart(current);
+            result = shotsFired(currentPoint, current);
+            fuckedEm = true;
+        }
+        if(result!=null) System.out.println("AlgoDeath6969 chose point: "+result);
+        else             System.out.println("AlgoDeath6969 strategically waited");
+        return result;
     }
     
     private Point findBiggestTriangle(Board board, int player, int max) {
@@ -60,6 +98,7 @@ public class AlgoDeath6969 extends Algorithm {
             for(int j = -1; j <= 1; j++) {
                 point = fireShot(currentPoint.x, currentPoint.y, i, j, board);
                 if(point != null){
+                    if(point.equals(currentPoint)) return null;
                     break;
                 }
             }
@@ -70,7 +109,7 @@ public class AlgoDeath6969 extends Algorithm {
     private Point fireShot(int x, int y, int dirX, int dirY, Board board) {
         while(inBounds(x, y, board)) {
             if(board.get(x, y, 0).data == board.getOppNum()) {
-                return board.get(x, y, 0);
+                return board.get(x-dirX, y-dirY, 0);
             }
             x += dirX;
             y += dirY;
@@ -81,5 +120,9 @@ public class AlgoDeath6969 extends Algorithm {
     private boolean inBounds(int x, int y, Board board) {
         return x < board.layersSize() && y < board.layersSize() && 
                     x + y < board.layersSize();
+    }
+
+    private Point findStart(Board current) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -90,6 +90,10 @@ public class Board {
         return 2;
     }
     
+    public int getPlayerTokens() {
+        return game.tokens;
+    }
+    
     public boolean opponentWaited(Board previous){
         return game.opponent_tokens > previous.game.opponent_tokens;
     }
