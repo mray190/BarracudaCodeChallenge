@@ -77,13 +77,13 @@ public class DeltaVolumeV2 extends Algorithm{
                 
                 //Our move is substantially greater than the opponent
                 //Capitalize while you can
-                if (deltaVolume>7) {
+                if (deltaVolume>11) {
                     return legalMovesPlayer.get(0);
                 }
                 //The opponents move is greater than ours by a lot
                 //Block it while you can
                 //If we can't block the opponent, wait to get a token
-                else if (deltaVolume < -7) {
+                else if (deltaVolume < -4) {
                     for (int i=0; i<legalMovesOpp.size(); i++) {
                         Point move = current.cockblock(legalMovesPlayer, legalMovesOpp.get(i));
                         if (move!=null)

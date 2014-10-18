@@ -93,12 +93,15 @@ public class Board {
     //TODO
     //--------------------------------------------------------------------------
     //Gets all squares that are below (within the triangle) of the parameter
-    public ArrayList<Point> getWaterfall(Point p) {
+    public ArrayList<Point> getWaterfall(Point p, boolean resetFreq) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = p.z; z >= 0; z--) {
             for (int x = p.x; x <= p.x + p.z - z; x++){
                 for (int y = p.y; y <= p.y + p.z - z +p.x - x; y++){
-                    points.add(get(x, y, z));
+                    Point temp = get(x,y,z);
+                    if (resetFreq) temp.frequency = 0;
+                    else temp.frequency++;
+                    points.add(temp);
                 }
             }
         }
@@ -108,7 +111,7 @@ public class Board {
     //Gets all legal moves for the given player number
     public ArrayList<Point> getLegalMoves(int playerNum) {
         //Containers
-        ArrayList<Point> allPoints = getWaterfall(top());
+        ArrayList<Point> allPoints = getWaterfall(top(),true);
         ArrayList<Point> legalPoints = new ArrayList<>();
         
         //Tokens
@@ -124,7 +127,7 @@ public class Board {
         for (Point p: allPoints){
             //Valid tokens to access
             if (p.z < tokens){
-                int volume = countSpotsFree(getWaterfall(p), playerNum, p);
+                int volume = countSpotsFree(getWaterfall(p,false), playerNum, p);
                 
                 if (playerNum == game.player){
                     p.volumePlayer = volume;
@@ -161,7 +164,7 @@ public class Board {
     //Returns null if unable to block
     //Precondition: playerMoves is sorted with best move FIRST
     public Point cockblock(ArrayList<Point> playerMoves, Point oppMove){
-        ArrayList<Point> waterfall = getWaterfall(oppMove);
+        ArrayList<Point> waterfall = getWaterfall(oppMove, false);
         
         for (Point p: playerMoves){
             if (waterfall.contains(p)){
