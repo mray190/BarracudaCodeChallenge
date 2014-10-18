@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GodzillasToothbrush;
 
 import java.util.ArrayList;
@@ -39,14 +34,4 @@ public class DifferenceChecker {
     
     public int[][][] getDifferenceBoard() { return this.differenceBoard; }
     public ArrayList<Point> getDifferences() { return this.changes; }
-    
-    public class Point {
-        private int x, y, z, data;
-        public Point(int x, int y, int z, int data) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.data = data;
-        }
-    }
 }
