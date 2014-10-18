@@ -48,6 +48,8 @@ public class Point {
                 .append(y)
                 .append(',')
                 .append(z)
+                .append(',')
+                .append(data)
                 .append(')')
                 .toString();
     }

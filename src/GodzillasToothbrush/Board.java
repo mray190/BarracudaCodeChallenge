@@ -113,7 +113,7 @@ public class Board {
             tokens = game.tokens;
         }
         else{
-            tokens = game.opponent_tokens;
+            tokens = game.opponent_tokens + game.player;
         }
         
         //Iterate
@@ -135,7 +135,6 @@ public class Board {
                 }
             }
         }
-        if(playerNum == game.player) System.out.println("Us: "+legalPoints.size()+" Them: "+game.legal_moves.length);
         return legalPoints;
     }    
 
