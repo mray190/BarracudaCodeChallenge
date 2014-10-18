@@ -1,5 +1,6 @@
 package GodzillasToothbrush;
 
+import com.barracuda.contest2014.GameState;
 import java.util.ArrayList;
 
 /**
@@ -9,14 +10,18 @@ import java.util.ArrayList;
 public class Board {
 
     private ArrayList<Layer> layers;
+    private GameState game;
+    private final int MAX_MOVES = 110;
 
     //Constructor
     //--------------------------------------------------------------------------
-    public Board(ArrayList<Layer> layers) {
+    public Board(ArrayList<Layer> layers, GameState game) {
         this.layers = layers;
+        this.game = game;
     }
 
-    public Board(int[][][] data) {
+    public Board(int[][][] data, GameState game) {
+        this.game = game;
         layers = new ArrayList<>();
 
         int size = data.length;
@@ -44,6 +49,10 @@ public class Board {
 
     public ArrayList<Layer> getBoard() {
         return layers;
+    }
+    
+    public int getMove() {
+        return MAX_MOVES - game.moves_remaining;
     }
     //--------------------------------------------------------------------------
 
