@@ -27,11 +27,11 @@ public class Death extends Algorithm {
             if(powerPlayed) {
                 //We already won, just dick around from here on out
                 if(current.getPlayerTokens() == 0) return null;
-                //result = sort(current.getLegalMoves(current.getPlayerNum()), new Algorithm.CompareScore());
+                sort(current.getLegalMoves(current.getPlayerNum()), new Algorithm.CompareScore());
             }
             else {
                 //Power Play
-                result = findBiggestTriangle(current, current.getPlayerNum(), current.getPlayerTokens());
+                //result = findBiggestTriangle(current, current.getPlayerNum(), current.getPlayerTokens());
                 powerPlayed = true;
             }
         }
@@ -73,7 +73,7 @@ public class Death extends Algorithm {
     private boolean checkTriangle(Board board, int size, int player, Point point) {
         //Iterate through subtriangle
         for(int x = point.x; x < point.x + size; x++) {
-            for(int y = point.y; y < point.y + size; y++) {
+            for(int y = point.y; y < point.y + size + point.x - x; y++) {
                 int datum = board.get(x,y,0).data;
                 if(datum != 0 && datum != player) return false;
             }

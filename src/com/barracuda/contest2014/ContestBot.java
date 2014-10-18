@@ -121,7 +121,7 @@ public class ContestBot {
 		}
 		else if (message.type.equals("error")) {
 			ErrorMessage e = (ErrorMessage)message;
-			System.err.println("Error: " + e.state.error);
+			System.out.println("Error: " + e.state.error);
 
 			// need to register IP address on the contest server
 			if (e.state.seen_host != null) {

@@ -113,7 +113,7 @@ public class Board {
             tokens = game.tokens;
         }
         else{
-            tokens = game.opponent_tokens;
+            tokens = game.opponent_tokens + game.player;
         }
         
         //Iterate
@@ -130,7 +130,7 @@ public class Board {
                 }
 
                 //Valid to take
-                if (volume != -1 && p.data==0){
+                if (volume != -1){
                     legalPoints.add(p);
                 }
             }
