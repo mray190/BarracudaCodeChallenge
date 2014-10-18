@@ -15,10 +15,9 @@ import java.util.ArrayList;
  */
 public class AlgoDeath6969 extends Algorithm {
     
-    boolean fuckedEm, waited, powerPlayed;
+    boolean waited, powerPlayed;
     
     public AlgoDeath6969() {
-        fuckedEm = false;
         waited = false;
         powerPlayed = false;
     }
@@ -26,31 +25,23 @@ public class AlgoDeath6969 extends Algorithm {
     @Override
     public Point makeMove(Board current, Board previous) {
         Point result = null;
-        if(fuckedEm) {
-            if(waited) {
-                if(powerPlayed) {
-                    //We already won, just dick around from here on out
-                    if(current.getPlayerTokens() == 0) return null;
-                    result = AlgorithmHelper.highestScore(current.getLegalMoves());
-                }
-                else {
-                    //Power Play
-                    result = findBiggestTriangle(current, current.getPlayerNum(), current.getPlayerTokens());
-                    powerPlayed = true;
-                }
+        if(waited) {
+            if(powerPlayed) {
+                //We already won, just dick around from here on out
+                if(current.getPlayerTokens() == 0) return null;
+                result = AlgorithmHelper.highestScore(current.getLegalMoves());
             }
             else {
-                //Wait
-                if(current.getPlayerTokens() == 5) {
-                    waited = true;
-                }
+                //Power Play
+                result = findBiggestTriangle(current, current.getPlayerNum(), current.getPlayerTokens());
+                powerPlayed = true;
             }
         }
         else {
-            //Go fuck em
-            Point currentPoint = findStart(current);
-            result = shotsFired(currentPoint, current);
-            fuckedEm = true;
+            //Wait
+            if(current.getPlayerTokens() == 5) {
+                waited = true;
+            }
         }
         if(result!=null) System.out.println("AlgoDeath6969 chose point: "+result);
         else             System.out.println("AlgoDeath6969 strategically waited");
@@ -92,7 +83,7 @@ public class AlgoDeath6969 extends Algorithm {
         return true;
     }
     
-    private Point shotsFired(Point currentPoint, Board board) {
+    /*private Point shotsFired(Point currentPoint, Board board) {
         Point point = null;
         for(int i = -1; i <= 1; i++) {
             for(int j = -1; j <= 1; j++) {
@@ -124,5 +115,5 @@ public class AlgoDeath6969 extends Algorithm {
 
     private Point findStart(Board current) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 }
