@@ -53,4 +53,33 @@ public class AlgoDeath6969 extends Algorithm {
         }
         return true;
     }
+    
+    private Point shotsFired(Point currentPoint, Board board) {
+        Point point = null;
+        for(int i = -1; i <= 1; i++) {
+            for(int j = -1; j <= 1; j++) {
+                point = fireShot(currentPoint.x, currentPoint.y, i, j, board);
+                if(point != null){
+                    break;
+                }
+            }
+        }
+        return point;
+    }
+    
+    private Point fireShot(int x, int y, int dirX, int dirY, Board board) {
+        while(inBounds(x, y, board)) {
+            if(board.get(x, y, 0).data == board.getOppNum()) {
+                return board.get(x, y, 0);
+            }
+            x += dirX;
+            y += dirY;
+        }
+        return null;
+    }
+    
+    private boolean inBounds(int x, int y, Board board) {
+        return x < board.layersSize() && y < board.layersSize() && 
+                    x + y < board.layersSize();
+    }
 }
