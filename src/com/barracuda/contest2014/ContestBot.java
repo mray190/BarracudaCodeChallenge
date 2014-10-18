@@ -22,6 +22,7 @@ public class ContestBot {
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
         private static final Algorithm algorithm = new Death();
+        private boolean debug = false;
         
         private Board board;
         private Board previousBoard;
