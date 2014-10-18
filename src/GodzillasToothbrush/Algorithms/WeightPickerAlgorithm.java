@@ -15,6 +15,10 @@ import GodzillasToothbrush.Point;
 public class WeightPickerAlgorithm extends Algorithm{
     @Override
     public Point makeMove(Board current, Board previous) {
-        return AlgorithmHelper.highestScore(current.getLegalMoves());
+        //Board weightedBoard = new Board()
+        for (int i=0; i<current.getLegalMoves().size(); i++) {
+            
+        }
+        return null;
     }
 }
