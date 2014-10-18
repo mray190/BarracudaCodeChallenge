@@ -65,7 +65,9 @@ public abstract class Algorithm {
             
             //When the max scores are equal, new logic:
             //Points closer to the middle are better
-            return (int)(lhs.scoreMiddle() - rhs.scoreMiddle());
+            if (rhs.scoreMiddle() > lhs.scoreMiddle()) return 1;
+            else if (rhs.scoreMiddle() < lhs.scoreMiddle()) return -1;
+            else return 0;
         }
 
     }

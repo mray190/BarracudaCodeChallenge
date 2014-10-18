@@ -20,8 +20,8 @@ public class DeltaVolumeV2 extends Algorithm{
         //Sorts based on the volume each move has
         //Volume describes how much the score will increases with this move
         //The sort puts the HIGHEST VOLUME at the START
-        Algorithm.sort(legalMovesPlayer, new Algorithm.CompareVolumePlayer());
-        Algorithm.sort(legalMovesOpp, new Algorithm.CompareVolumeOpp());
+        Algorithm.sort(legalMovesPlayer, new Algorithm.MasterCompare(true));
+        Algorithm.sort(legalMovesOpp, new Algorithm.MasterCompare(false));
         
 
         //DEBUG
