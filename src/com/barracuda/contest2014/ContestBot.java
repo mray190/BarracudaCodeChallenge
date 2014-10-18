@@ -4,6 +4,7 @@
  */
 package com.barracuda.contest2014;
 
+import GodzillasToothbrush.Board;
 import com.barracuda.visualize.TerminalPrinter;
 import java.io.IOException;
 
@@ -64,6 +65,9 @@ public class ContestBot {
 	public PlayerMessage handleMessage(Message message) {
 		if (message.type.equals("request")) {
 			MoveRequestMessage m = (MoveRequestMessage)message;
+                        
+                        Board board = new Board(m.state.board);
+                        
 			//System.out.println(m);
                         printer.printDetails(m.state.board);
                         
