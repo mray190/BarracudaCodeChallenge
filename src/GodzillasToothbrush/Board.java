@@ -62,10 +62,6 @@ public class Board {
         return MAX_MOVES - game.moves_remaining;
     }
 
-    public boolean isValidMove(Point point) {
-        return getLegalMoves().contains(point);
-    }
-
     public int getPlayerNum() {
         return game.player;
     }
@@ -102,24 +98,6 @@ public class Board {
             }
         }
         return points;
-    }
-    
-    public ArrayList<Point> getLegalMoves() {
-        ArrayList<Point> legalMoves = new ArrayList<>();
-
-        for (int[] move : game.legal_moves) {
-            //Convert to point
-            legalMoves.add(
-                    new Point(
-                            move[0],
-                            move[1],
-                            move[2],
-                            game.board[move[0]][move[1]][move[2]]
-                    )
-            );
-        }
-
-        return legalMoves;
     }
     
     public ArrayList<Point> getLegalMoves(int playerNum) {
