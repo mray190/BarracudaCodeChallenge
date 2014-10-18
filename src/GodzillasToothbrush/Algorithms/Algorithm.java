@@ -32,11 +32,7 @@ public abstract class Algorithm {
 
     //Sorting
     //--------------------------------------------------------------------------
-    public static Point highestScore(ArrayList<Point> points) {
-        return sort(points, new CompareScore());
-    }
-
-    private static Point sort(ArrayList<Point> points, Comparator<Point> comp) {
+    protected static Point sort(ArrayList<Point> points, Comparator<Point> comp) {
         if (points.isEmpty()) {
             return null;
         }
