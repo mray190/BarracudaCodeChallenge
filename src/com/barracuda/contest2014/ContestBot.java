@@ -6,6 +6,7 @@ package com.barracuda.contest2014;
 
 import GodzillasToothbrush.Algorithms.AlgoDeath6969;
 import GodzillasToothbrush.Algorithms.Algorithm;
+import GodzillasToothbrush.Algorithms.ScoreWhoreAlgorithm;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
 import com.barracuda.visualize.TerminalPrinter;
@@ -21,7 +22,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = new AlgoDeath6969();
+        private static final Algorithm algorithm = new ScoreWhoreAlgorithm();
         private boolean debug = true;
         
         private Board board;
@@ -84,14 +85,15 @@ public class ContestBot {
 
                         
                         //Godzilla Logic
-                        //------------------------------------------------------    
+                        //------------------------------------------------------
+                        
+                        //Print
+                        //printer.printDetails(m.state.board);               
+                        
                         //Ensures move is valid
                         if (debug){
                             return new PlayerMoveMessage(m.id, m.state.legal_moves[0]);
-                        }
-                        
-                        //Print
-                        printer.printDetails(m.state.board);                        
+                        }         
 
                         //Data Mine
                         previousBoard = board;
@@ -111,7 +113,7 @@ public class ContestBot {
 		else if (message.type.equals("move_result")) {
 			ResultMessage r = (ResultMessage)message;
                         
-                        if (r.state.error != null || !r.state.error.equals("")){
+                        if (r.state.error != null){
                             System.out.println(r);
                             System.exit(69);
                         }

@@ -14,6 +14,7 @@ public class DifferenceChecker {
     private ArrayList<Point> changes;
 
     public DifferenceChecker(Board currentBoard) {
+        //HANDLE IF CURRENTBOARD AND PREVIOUS BOARD ARE NULL (FIRST TIME THROUGH)
         this.currentBoard = currentBoard;
         this.previousBoard = null;
     }
