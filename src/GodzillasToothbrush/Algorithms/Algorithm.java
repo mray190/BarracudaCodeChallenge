@@ -21,8 +21,10 @@ public abstract class Algorithm {
      * @return the point to be changed, null if waiting
      */
     public abstract Point makeMove(Board current, Board previous);
+    
+    public abstract void endGame();
     //--------------------------------------------------------------------------
-
+    
     //Helper Calculations
     //--------------------------------------------------------------------------
     public static int scoreOf(Point p) {
