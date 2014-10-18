@@ -62,10 +62,6 @@ public class Board {
         return MAX_MOVES - game.moves_remaining;
     }
 
-    public boolean isValidMove(Point point) {
-        return getLegalMoves().contains(point);
-    }
-
     public int getPlayerNum() {
         return game.player;
     }
@@ -92,11 +88,12 @@ public class Board {
 
     //TODO
     //--------------------------------------------------------------------------
+    //Gets all squares that are below (within the triangle) of the parameter
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = 0; z <= p.z; z++) {
-            for (int x = p.x; x < layers.size() - z - p.y; x++) {
-                for (int y = p.y; y < layers.size() - z - p.x; y++) {
+            for (int y = p.y; y < layers.size() - z; y++){
+                for (int x = p.x; x < layers.size() - z - y; x++){
                     points.add(get(x, y, z));
                 }
             }
@@ -104,24 +101,7 @@ public class Board {
         return points;
     }
     
-    public ArrayList<Point> getLegalMoves() {
-        ArrayList<Point> legalMoves = new ArrayList<>();
-
-        for (int[] move : game.legal_moves) {
-            //Convert to point
-            legalMoves.add(
-                    new Point(
-                            move[0],
-                            move[1],
-                            move[2],
-                            game.board[move[0]][move[1]][move[2]]
-                    )
-            );
-        }
-
-        return legalMoves;
-    }
-    
+    //Gets all legal moves for the given player number
     public ArrayList<Point> getLegalMoves(int playerNum) {
         //Containers
         ArrayList<Point> allPoints = getWaterfall(top());
@@ -172,7 +152,21 @@ public class Board {
         }
         
         return count;
-    }    
+    }
+    
+    //Returns null if unable to block
+    //Precondition: playerMoves is sorted with best move FIRST
+    public Point cockblock(ArrayList<Point> playerMoves, Point oppMove){
+        ArrayList<Point> waterfall = getWaterfall(oppMove);
+        
+        for (Point p: playerMoves){
+            if (waterfall.contains(p)){
+                return p;
+            }
+        }
+        
+        return null;
+    }
     //--------------------------------------------------------------------------
 
     //Point System
