@@ -6,6 +6,7 @@ package com.barracuda.contest2014;
 
 import GodzillasToothbrush.Algorithms.Algorithm;
 import GodzillasToothbrush.Algorithms.DeltaVolumeV2;
+import GodzillasToothbrush.Algorithms.DeltaVolumeV3;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
 import com.barracuda.visualize.TerminalPrinter;

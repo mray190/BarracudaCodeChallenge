@@ -2,6 +2,8 @@ package GodzillasToothbrush;
 
 import com.barracuda.contest2014.GameState;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -108,6 +110,40 @@ public class Board {
         return points;
     }
     
+    public ArrayList<Point> getLargestBottom(int playerNum){
+        //All moves, all legal moves (ignoring token count)
+        ArrayList<Point> allMoves = getWaterfall(top(), false);
+        ArrayList<Point> legal = new ArrayList<>();
+        
+        //Gets all moves that are legal (only 0 or our space)
+        for (Point move: allMoves){
+            ArrayList<Point> waterfall = getWaterfall(move, false);
+            
+            boolean valid = true;
+            for (Point drop: waterfall){
+                if (drop.data != 0 && drop.data != playerNum){
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) legal.add(move);
+        }
+        
+        //Sort (descending) with most spots on floor first
+        Collections.sort(legal, new Comparator<Point>(){
+
+            @Override
+            public int compare(Point o1, Point o2) {
+                return countSpotsBottom(o2) - countSpotsBottom(o1);
+            }
+            
+        });
+        
+        //Gets the bottom triangle of our best option
+        if (legal.isEmpty()) return null;
+        return getSpotsBottom(legal.get(0));
+    }
+    
     //Gets all legal moves for the given player number
     public ArrayList<Point> getLegalMoves(int playerNum) {
         //Containers
@@ -159,6 +195,25 @@ public class Board {
         }
         
         return count;
+    }
+    
+    //In the waterfall of the point, all subpoints with z == 0 and data == 0
+    public int countSpotsBottom(Point point){
+        ArrayList<Point> waterfall = getWaterfall(point, false);
+        int count = 0;
+        for (Point x: waterfall){
+            if (x.z == 0 && x.data == 0) count++;
+        }
+        return count;
+    }
+    
+    public ArrayList<Point> getSpotsBottom(Point point){
+        ArrayList<Point> waterfall = getWaterfall(point, false);
+        ArrayList<Point> triangle = new ArrayList<>();
+        for (Point x: waterfall){
+            if (x.z == 0) triangle.add(x);
+        }
+        return triangle;
     }
     
     //Returns null if unable to block
