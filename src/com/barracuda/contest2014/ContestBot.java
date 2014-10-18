@@ -112,6 +112,7 @@ public class ContestBot {
 			//GameOverMessage g = (GameOverMessage)message;
 			//System.out.println(g);
                         //System.exit(69);
+                        algorithm.endGame();
 			return null;
 		}
 		else if (message.type.equals("greetings_program")) {

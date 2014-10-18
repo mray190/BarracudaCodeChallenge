@@ -92,16 +92,16 @@ public class Board {
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = p.z; z >= 0; z--) {
-            for (int y = p.y; y <= p.y + p.z - z; y++){
-                for (int x = p.x; x <= p.x + p.z + p.y - z - y; x++){
-                    //System.out.println("Point: " + x + " " + " " + y + " "+ z );
+            for (int x = p.x; x <= p.x + p.z - z; x++){
+                for (int y = p.y; y <= p.y + p.z - z +p.x - x; y++){
                     points.add(get(x, y, z));
                 }
             }
         }
         return points;
     }
-
+    
+    //Gets all legal moves for the given player number
     public ArrayList<Point> getLegalMoves(int playerNum) {
         //Containers
         ArrayList<Point> allPoints = getWaterfall(top());
@@ -120,7 +120,7 @@ public class Board {
         for (Point p: allPoints){
             //Valid tokens to access
             if (p.z < tokens){
-                int volume = countSpotsFree(getWaterfall(p), playerNum);
+                int volume = countSpotsFree(getWaterfall(p), playerNum, p);
                 
                 if (playerNum == game.player){
                     p.volumePlayer = volume;
@@ -135,18 +135,14 @@ public class Board {
                 }
             }
         }
-        
-        System.out.println("Turn incremented");
-        //if (playerNum==game.player && legalPoints.size()!=game.legal_moves.length) { 
-            System.out.println("Ours: " + legalPoints.size());
-            System.out.println("Theirs: " + game.legal_moves.length);
-        //}
+        if(playerNum == game.player) System.out.println("Us: "+legalPoints.size()+" Them: "+game.legal_moves.length);
         return legalPoints;
     }    
 
     //Return -1 if not legal move    
-    public int countSpotsFree(ArrayList<Point> points, int playerNum) {
+    public int countSpotsFree(ArrayList<Point> points, int playerNum, Point parent) {
         int count = 0;
+        if(parent.data != 0) return -1;
         for (Point p : points) {
             if (p.data == 0){
                 count++;

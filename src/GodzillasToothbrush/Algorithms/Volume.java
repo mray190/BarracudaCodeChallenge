@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Volume extends Algorithm{
 
     boolean waited;
+    boolean powerPlayed;
     
     public Volume() {
         endGame();
@@ -20,10 +21,11 @@ public class Volume extends Algorithm{
     public Point makeMove(Board current, Board previous) {
         if(!waited) {
             if(current.getPlayerTokens() == 4) waited = true;
+            System.out.println("strategically waited");
             return null;
         }
-        if(current.getPlayerTokens() == 0) return null;
-        if(current.getOppTokens() == 0)    return null;
+        if(current.getPlayerTokens() == 0) {System.out.println("strategically waited");return null;}
+        if(current.getOppTokens() == 0)    {System.out.println("strategically waited");return null;}
         //Gets legal moves for the player and the opponent
         ArrayList<Point> legalMovesPlayer = current.getLegalMoves(current.getPlayerNum());
         ArrayList<Point> legalMovesOpp    = current.getLegalMoves(current.getOppNum());
@@ -40,14 +42,22 @@ public class Volume extends Algorithm{
         Point bestMovePlayer = legalMovesPlayer.remove(0);
         Point bestMoveOpp    = legalMovesOpp.remove(0);
         
-        if(bestMovePlayer.volumePlayer >= bestMoveOpp.volumeOpp) {
+        if(powerPlayed && bestMovePlayer.volumePlayer >= bestMoveOpp.volumeOpp) {
             //We play our move (score whore)
+            if(bestMovePlayer!=null) System.out.println("chose point: "+bestMovePlayer);
+            else             System.out.println("strategically waited");
+            return bestMovePlayer;
+        }
+        else if(!powerPlayed) {
+            powerPlayed = true;
+            System.out.println("Powerplayed point: "+bestMovePlayer);
             return bestMovePlayer;
         }
         else {
             //Block their move (cock block)
             bestMoveOpp = findCockBlock(bestMoveOpp, current);
-            if(bestMoveOpp.data != 0) return bestMovePlayer;
+            if(bestMoveOpp.data != 0) {System.out.println("chose point: "+bestMovePlayer);return bestMovePlayer;}
+            System.out.println("chose cockblock: "+bestMoveOpp);
             return bestMoveOpp;
         }
     }
@@ -55,6 +65,7 @@ public class Volume extends Algorithm{
     @Override
     public void endGame() {
         waited = false;
+        powerPlayed = false;
     }
     //finds a solid cock block that only costs 1 token
     private Point findCockBlock(Point bestMoveOpp, Board board) {
@@ -92,7 +103,7 @@ public class Volume extends Algorithm{
                 break;
         }
         for(int x = bestMoveOpp.x; x < bestMoveOpp.x + size; x++) {
-            for(int y = bestMoveOpp.y; y < bestMoveOpp.y + size - x; y++) {
+            for(int y = bestMoveOpp.y; y < bestMoveOpp.y + size + bestMoveOpp.x - x; y++) {
                 if(board.get(x, y, 0).data == 0) return board.get(x, y, 0);
             }
         }
