@@ -79,6 +79,16 @@ public class Board {
     public boolean isValidMove(Point point){
         return getLegalMoves().contains(point);
     }
+    
+    public int getPlayerNum() {
+        return game.player;
+    }
+    
+    public int getOppNum() {
+        if (game.player==2)
+            return 1;
+        return 2;
+    }
     //--------------------------------------------------------------------------
 
     //Sizes
