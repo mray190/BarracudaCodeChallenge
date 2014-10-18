@@ -11,6 +11,10 @@ public class ScoreWhoreAlgorithm extends Algorithm{
 
     @Override
     public Point makeMove(Board current, Board previous) {
+        if (current.getMove() <= 5){
+            return null;
+        }
+        
         if (current.opponentWaited(previous)){
             return null;
         }

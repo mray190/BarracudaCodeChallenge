@@ -28,4 +28,19 @@ public class AlgorithmHelper {
         
         return points.get(0);
     }
+    
+    public static Point highestValue(ArrayList<Point> points){
+        if (points.isEmpty()) return null;
+        
+        points.sort(new Comparator<Point>(){
+
+            @Override
+            public int compare(Point o1, Point o2) {
+                return scoreOf(o2) - scoreOf(o1);
+            }
+            
+        });
+        
+        return points.get(0);        
+    }
 }
