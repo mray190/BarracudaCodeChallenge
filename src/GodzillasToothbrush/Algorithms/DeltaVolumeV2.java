@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Aaron
  */
-public class DeltaVolume extends Algorithm{
+public class DeltaVolumeV2 extends Algorithm{
 
     @Override
     public Point makeMove(Board current, Board previous) {
@@ -20,8 +20,9 @@ public class DeltaVolume extends Algorithm{
         //Sorts based on the volume each move has
         //Volume describes how much the score will increases with this move
         //The sort puts the HIGHEST VOLUME at the START
-        Algorithm.sort(legalMovesPlayer, new Algorithm.MasterCompare(true));
-        Algorithm.sort(legalMovesOpp, new Algorithm.MasterCompare(false));
+        Algorithm.sort(legalMovesPlayer, new Algorithm.CompareVolumePlayer());
+        Algorithm.sort(legalMovesOpp, new Algorithm.CompareVolumeOpp());
+        
 
         //DEBUG
         //----------------------------------------------------------------------
