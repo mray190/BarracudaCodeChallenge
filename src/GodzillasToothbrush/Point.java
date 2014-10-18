@@ -21,12 +21,21 @@ public class Point {
     }
     //--------------------------------------------------------------------------
 
-    //Default Object Functions
+    
+    //Scores
     //--------------------------------------------------------------------------
     public int[] toMove(){
         return new int[]{x, y, z};
-    }
+    }    
     
+    public int score(){
+        return z*(z+1)*(z+2)/6;        
+    }
+    //--------------------------------------------------------------------------
+
+    
+    //Default Object Functions
+    //--------------------------------------------------------------------------
     @Override
     public String toString() {
         return new StringBuilder()
