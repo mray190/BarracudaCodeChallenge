@@ -65,7 +65,6 @@ public class ContestBot {
 		if (message.type.equals("request")) {
 			MoveRequestMessage m = (MoveRequestMessage)message;
 			//System.out.println(m);
-
                         printer.printDetails(m.state.board);
                         
 			if (game_id != m.game_id) {

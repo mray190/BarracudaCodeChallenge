@@ -22,17 +22,15 @@ public class StringPrinter extends Printer<String> {
             if (details) out.append("LEVEL: ").append(z).append('\n');
             
             //All Rows
-            for (int y = 0; y < z; y++){
+            for (int y = 0; y < maxZ - z; y++){
                 
                 //All Columns
-                for (int x = 0; x < z; x++){
+                for (int x = 0; x < maxZ - z - y; x++){
                     out.append(grid[x][y][z]).append(' ');
                 }
-                
                 //New Line (Next Row)
                 out.append('\n');
             }
-            
             //New Lines (Next Layer)
             out.append('\n');
             if (details) out.append('\n');
