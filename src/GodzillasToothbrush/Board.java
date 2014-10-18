@@ -88,6 +88,7 @@ public class Board {
 
     //TODO
     //--------------------------------------------------------------------------
+    //Gets all squares that are below (within the triangle) of the parameter
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = 0; z <= p.z; z++) {
@@ -100,6 +101,7 @@ public class Board {
         return points;
     }
     
+    //Gets all legal moves for the given player number
     public ArrayList<Point> getLegalMoves(int playerNum) {
         //Containers
         ArrayList<Point> allPoints = getWaterfall(top());
@@ -150,7 +152,21 @@ public class Board {
         }
         
         return count;
-    }    
+    }
+    
+    //Returns null if unable to block
+    //Precondition: playerMoves is sorted with best move FIRST
+    public Point cockblock(ArrayList<Point> playerMoves, Point oppMove){
+        ArrayList<Point> waterfall = getWaterfall(oppMove);
+        
+        for (Point p: playerMoves){
+            if (waterfall.contains(p)){
+                return p;
+            }
+        }
+        
+        return null;
+    }
     //--------------------------------------------------------------------------
 
     //Point System

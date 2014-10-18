@@ -32,12 +32,8 @@ public abstract class Algorithm {
 
     //Sorting
     //--------------------------------------------------------------------------
-    protected static Point sort(ArrayList<Point> points, Comparator<Point> comp) {
-        if (points.isEmpty()) {
-            return null;
-        }
+    protected static void sort(ArrayList<Point> points, Comparator<Point> comp) {
         Collections.sort(points, comp);
-        return points.get(points.size() - 1);
     }
     //--------------------------------------------------------------------------
 
@@ -47,7 +43,7 @@ public abstract class Algorithm {
 
         @Override
         public int compare(Point arg0, Point arg1) {
-            return scoreOf(arg0) - scoreOf(arg1);
+            return scoreOf(arg1) - scoreOf(arg0);
         }
 
     }
@@ -56,7 +52,7 @@ public abstract class Algorithm {
 
         @Override
         public int compare(Point o1, Point o2) {
-            return o1.volumePlayer - o2.volumePlayer;
+            return o2.volumePlayer - o1.volumePlayer;
         }
     }    
     
@@ -64,7 +60,7 @@ public abstract class Algorithm {
 
         @Override
         public int compare(Point o1, Point o2) {
-            return o1.volumeOpp - o2.volumeOpp;
+            return o2.volumeOpp - o1.volumeOpp;
         }
     }        
     //--------------------------------------------------------------------------    
