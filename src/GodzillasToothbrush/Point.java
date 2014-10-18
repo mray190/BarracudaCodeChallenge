@@ -9,6 +9,7 @@ public class Point {
     //Data
     //--------------------------------------------------------------------------
     public int x, y, z, data;
+    public int volumePlayer, volumeOpp;
     //--------------------------------------------------------------------------
 
     //Constructor
@@ -18,6 +19,8 @@ public class Point {
         this.y = y;
         this.z = z;
         this.data = data;
+        this.volumePlayer = -1;
+        this.volumeOpp = -1;
     }
     //--------------------------------------------------------------------------
 

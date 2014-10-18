@@ -56,12 +56,20 @@ public abstract class Algorithm {
 
     }
     
-    public static class CompareVolume implements Comparator<Point> {
+    public static class CompareVolumePlayer implements Comparator<Point> {
 
         @Override
         public int compare(Point o1, Point o2) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return o1.volumePlayer - o2.volumePlayer;
         }
     }    
+    
+    public static class CompareVolumeOpp implements Comparator<Point> {
+
+        @Override
+        public int compare(Point o1, Point o2) {
+            return o1.volumeOpp - o2.volumeOpp;
+        }
+    }        
     //--------------------------------------------------------------------------    
 }

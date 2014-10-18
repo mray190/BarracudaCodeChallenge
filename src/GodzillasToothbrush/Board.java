@@ -35,6 +35,10 @@ public class Board {
 
     //Getters
     //--------------------------------------------------------------------------
+    public Point top(){
+        return layers.get(layers.size() - 1).get(0, 0);
+    }
+    
     public Point get(int x, int y, int z) {
         return layers.get(z).get(x, y);
     }
@@ -110,13 +114,56 @@ public class Board {
         return legalMoves;
     }
     
-    public ArrayList<Point> getOppLegalMoves() {
-        return null;
+    public ArrayList<Point> getLegalMoves(int playerNum) {
+        //Containers
+        ArrayList<Point> allPoints = getWaterfall(top());
+        ArrayList<Point> legalPoints = new ArrayList<>();
+        
+        //Tokens
+        int tokens;
+        if (playerNum == game.player){
+            tokens = game.tokens;
+        }
+        else{
+            tokens = game.opponent_tokens;
+        }
+        
+        //Iterate
+        for (Point p: allPoints){
+            //Valid tokens to access
+            if (p.z < tokens){
+                int volume = countSpotsFree(getWaterfall(p), playerNum);
+                
+                if (playerNum == game.player){
+                    p.volumePlayer = volume;
+                }
+                else{
+                    p.volumeOpp = volume;
+                }
+
+                //Valid to take
+                if (volume != -1){
+                    legalPoints.add(p);
+                }
+            }
+        }
+        
+        return legalPoints;
     }    
 
     //Return -1 if not legal move    
-    public int countSpotsFree(ArrayList<Point> x, int playerNum) {
-        return -1;
+    public int countSpotsFree(ArrayList<Point> points, int playerNum) {
+        int count = 0;
+        for (Point p : points) {
+            if (p.data == 0){
+                count++;
+            }
+            else if (p.data != playerNum){
+                return -1;
+            }
+        }
+        
+        return count;
     }    
     //--------------------------------------------------------------------------
 
