@@ -41,29 +41,33 @@ public abstract class Algorithm {
 
     //Comparators
     //--------------------------------------------------------------------------
-    public static class CompareScore implements Comparator<Point> {
+    public static class MasterCompare implements Comparator<Point> {
 
+        private final boolean isPlayer;
+        
+        public MasterCompare(boolean isPlayer){
+            this.isPlayer = isPlayer;
+        }
+        
+        //Normally returns negative when lhs < rhs
+        //We want to sort reverse ascending
+        //Therefore we return negative when rhs < lhs
+        //
+        //Return positive if lhs > rhs
         @Override
-        public int compare(Point arg0, Point arg1) {
-            return scoreOf(arg1) - scoreOf(arg0);
+        public int compare(Point lhs, Point rhs) {
+            //Always compare based on the max score that can be achieved
+            //with this point
+            int volumeDiff;
+            if (isPlayer) volumeDiff = rhs.volumePlayer - lhs.volumePlayer;
+            else          volumeDiff = rhs.volumeOpp - lhs.volumeOpp;
+            if (volumeDiff != 0) return volumeDiff;
+            
+            //When the max scores are equal, new logic:
+            //Points closer to the middle are better
+            return (int)(lhs.scoreMiddle() - rhs.scoreMiddle());
         }
 
     }
-    
-    public static class CompareVolumePlayer implements Comparator<Point> {
-
-        @Override
-        public int compare(Point o1, Point o2) {
-            return o2.volumePlayer - o1.volumePlayer;
-        }
-    }    
-    
-    public static class CompareVolumeOpp implements Comparator<Point> {
-
-        @Override
-        public int compare(Point o1, Point o2) {
-            return o2.volumeOpp - o1.volumeOpp;
-        }
-    }        
     //--------------------------------------------------------------------------    
 }

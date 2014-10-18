@@ -42,8 +42,8 @@ public class Volume extends Algorithm{
         Collections.shuffle(legalMovesPlayer);
         Collections.shuffle(legalMovesOpp);
 
-        Algorithm.sort(legalMovesPlayer, new Algorithm.CompareVolumePlayer());
-        Algorithm.sort(legalMovesOpp,    new Algorithm.CompareVolumeOpp());
+        Algorithm.sort(legalMovesPlayer, new Algorithm.MasterCompare(true));
+        Algorithm.sort(legalMovesOpp,    new Algorithm.MasterCompare(false));
         
         //AI to wait / block / conquer
         //Pseudo idea:

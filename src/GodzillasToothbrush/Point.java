@@ -34,6 +34,22 @@ public class Point {
     public int score(){
         return z*(z+1)*(z+2)/6;        
     }
+    
+    public double scoreMiddle(){
+        //Too high, you are the middle
+        if (10 - z <= 2) return 0;
+        
+        //This is the pseudo middle
+        Point middle = new Point(2, 2, z, -1);
+        
+        //Gets distance
+        return distanceTo(middle);
+    }
+    
+    public double distanceTo(Point other){
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
+    }
+    
     //--------------------------------------------------------------------------
 
     
