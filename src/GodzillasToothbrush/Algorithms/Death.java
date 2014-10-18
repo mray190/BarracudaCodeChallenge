@@ -29,7 +29,7 @@ public class Death extends Algorithm {
             if(powerPlayed) {
                 //We already won, just dick around from here on out
                 if(current.getPlayerTokens() == 0) return null;
-                result = sort(current.getLegalMoves(), new Algorithm.CompareScore());
+                result = sort(current.getLegalMoves(current.getPlayerNum()), new Algorithm.CompareScore());
             }
             else {
                 //Power Play

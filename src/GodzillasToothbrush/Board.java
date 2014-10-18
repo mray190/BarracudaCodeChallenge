@@ -62,10 +62,6 @@ public class Board {
         return MAX_MOVES - game.moves_remaining;
     }
 
-    public boolean isValidMove(Point point) {
-        return getLegalMoves().contains(point);
-    }
-
     public int getPlayerNum() {
         return game.player;
     }
@@ -95,31 +91,13 @@ public class Board {
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = 0; z <= p.z; z++) {
-            for (int x = p.x; x < layers.size() - z - p.y; x++) {
-                for (int y = p.y; y < layers.size() - z - p.x; y++) {
+            for (int y = p.y; y < layers.size() - z; y++){
+                for (int x = p.x; x < layers.size() - z - y; x++){
                     points.add(get(x, y, z));
                 }
             }
         }
         return points;
-    }
-    
-    public ArrayList<Point> getLegalMoves() {
-        ArrayList<Point> legalMoves = new ArrayList<>();
-
-        for (int[] move : game.legal_moves) {
-            //Convert to point
-            legalMoves.add(
-                    new Point(
-                            move[0],
-                            move[1],
-                            move[2],
-                            game.board[move[0]][move[1]][move[2]]
-                    )
-            );
-        }
-
-        return legalMoves;
     }
     
     public ArrayList<Point> getLegalMoves(int playerNum) {
