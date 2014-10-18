@@ -91,9 +91,10 @@ public class Board {
     //Gets all squares that are below (within the triangle) of the parameter
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
-        for (int z = 0; z <= p.z; z++) {
-            for (int y = p.y; y < layers.size() - z; y++){
-                for (int x = p.x; x < layers.size() - z - y; x++){
+        for (int z = p.z; z >= 0; z--) {
+            for (int y = p.y; y <= p.y + p.z - z; y++){
+                for (int x = p.x; x <= p.x + p.z + p.y - z - y; x++){
+                    //System.out.println("Point: " + x + " " + " " + y + " "+ z );
                     points.add(get(x, y, z));
                 }
             }
@@ -129,12 +130,17 @@ public class Board {
                 }
 
                 //Valid to take
-                if (volume != -1){
+                if (volume != -1 && p.data==0){
                     legalPoints.add(p);
                 }
             }
         }
         
+        System.out.println("Turn incremented");
+        //if (playerNum==game.player && legalPoints.size()!=game.legal_moves.length) { 
+            System.out.println("Ours: " + legalPoints.size());
+            System.out.println("Theirs: " + game.legal_moves.length);
+        //}
         return legalPoints;
     }    
 
