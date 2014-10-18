@@ -6,6 +6,15 @@ package com.barracuda.visualize;
  */
 public abstract class Printer<T> {
     
+    //Static
+    //--------------------------------------------------------------------------
+    public static final FilePrinter filePrinter = new FilePrinter();
+    public static final TerminalPrinter terminalPrinter = new TerminalPrinter();
+    public static final StringPrinter stringPrinter = new StringPrinter();
+    //--------------------------------------------------------------------------
+    
+    //Functions
+    //--------------------------------------------------------------------------
     protected abstract T print(int[][][] grid, boolean details);
     
     public T print(int[][][] grid){
@@ -15,5 +24,6 @@ public abstract class Printer<T> {
     public T printDetails(int[][][] grid){
         return print(grid, true);
     }    
+    //--------------------------------------------------------------------------
     
 }
