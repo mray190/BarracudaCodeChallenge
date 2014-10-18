@@ -13,11 +13,11 @@ import java.util.ArrayList;
  *
  * @author shane
  */
-public class AlgoDeath6969 extends Algorithm {
+public class Death extends Algorithm {
     
     boolean waited, powerPlayed;
     
-    public AlgoDeath6969() {
+    public Death() {
         waited = false;
         powerPlayed = false;
     }
@@ -39,7 +39,7 @@ public class AlgoDeath6969 extends Algorithm {
         }
         else {
             //Wait
-            if(current.getPlayerTokens() == 5) {
+            if(current.getPlayerTokens() == 6) {
                 waited = true;
             }
         }
