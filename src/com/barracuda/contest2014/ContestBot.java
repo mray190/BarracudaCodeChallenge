@@ -4,7 +4,7 @@
  */
 package com.barracuda.contest2014;
 
-import GodzillasToothbrush.Algorithms.AlgoDeath6969;
+import GodzillasToothbrush.Algorithms.Death;
 import GodzillasToothbrush.Algorithms.Algorithm;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
