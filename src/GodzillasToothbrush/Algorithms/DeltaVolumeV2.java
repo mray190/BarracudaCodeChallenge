@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class DeltaVolumeV2 extends Algorithm{
     
     private final static boolean debug = false;
+    private final static boolean cockblockFreq = true;
 
     @Override
     public Point makeMove(Board current, Board previous) {
@@ -23,8 +24,7 @@ public class DeltaVolumeV2 extends Algorithm{
         //Volume describes how much the score will increases with this move
         //The sort puts the HIGHEST VOLUME at the START
         Algorithm.sort(legalMovesPlayer, new Algorithm.MasterCompare(true));
-        Algorithm.sort(legalMovesOpp, new Algorithm.MasterCompare(false));
-        
+        Algorithm.sort(legalMovesOpp, new Algorithm.MasterCompare(false));           
 
         //DEBUG
         //----------------------------------------------------------------------
@@ -67,17 +67,17 @@ public class DeltaVolumeV2 extends Algorithm{
             
             //Tokens are greater than 4, play regardless of opponents
             if (current.getPlayerTokens()>=4) {
-                //OPTIMIZE FOR MIDDLE
                 return legalMovesPlayer.get(0);
             }
             //We don't have enough tokens to make a power play
             //Use our other logic to determine what
             else {
-                int deltaVolume = legalMovesPlayer.get(0).volumePlayer - legalMovesOpp.get(0).volumeOpp;
                 
+                int deltaVolume = legalMovesPlayer.get(0).volumePlayer - legalMovesOpp.get(0).volumeOpp;
+
                 //Our move is substantially greater than the opponent
                 //Capitalize while you can
-                if (deltaVolume>11) {
+                if (deltaVolume>9) {
                     return legalMovesPlayer.get(0);
                 }
                 //The opponents move is greater than ours by a lot
@@ -91,10 +91,19 @@ public class DeltaVolumeV2 extends Algorithm{
                     }
                     return null;
                 }
-                //No substantial moves - use other logic to determine next move
+
                 else {
-                    //
-                    if (legalMovesPlayer.size()<5) {
+                    Algorithm.sort(legalMovesOpp, new Algorithm.FrequencyCompare());
+                    //Frequency of one of their points is over 5
+                    if (legalMovesOpp.get(0).frequency>=10) {
+                        Point move = current.cockblock(legalMovesPlayer, legalMovesOpp.get(0));
+                        if (move!=null)
+                            return move;
+                    }
+                
+                    //No substantial moves - use other logic to determine next move
+                    //Check to see if the open area of the bottom layer is less than 5
+                    if (false) {
                         return legalMovesPlayer.get(0);
                     }
                     //We have a move that can be played on the second level,
