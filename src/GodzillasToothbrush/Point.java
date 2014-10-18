@@ -10,23 +10,6 @@ import java.util.ArrayList;
  */
 public class Point {
 
-    //Static
-    //--------------------------------------------------------------------------
-    public static ArrayList<Point> convert(int[][][] grid) {
-        ArrayList<Point> points = new ArrayList<>();
-
-        for (int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
-                for (int z = 0; z < grid[x][y].length; z++) {
-                    points.add(new Point(x, y, z, grid[x][y][z]));
-                }
-            }
-        }
-
-        return points;
-    }
-    //--------------------------------------------------------------------------
-
     //Data
     //--------------------------------------------------------------------------
     public int x, y, z, data;
