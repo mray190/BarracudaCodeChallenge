@@ -7,7 +7,6 @@ package GodzillasToothbrush.Algorithms;
 
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,8 +17,7 @@ public class Death extends Algorithm {
     boolean waited, powerPlayed;
     
     public Death() {
-        waited = false;
-        powerPlayed = false;
+        endGame();
     }
     
     @Override
@@ -29,7 +27,7 @@ public class Death extends Algorithm {
             if(powerPlayed) {
                 //We already won, just dick around from here on out
                 if(current.getPlayerTokens() == 0) return null;
-                result = sort(current.getLegalMoves(current.getPlayerNum()), new Algorithm.CompareScore());
+                //result = sort(current.getLegalMoves(current.getPlayerNum()), new Algorithm.CompareScore());
             }
             else {
                 //Power Play
@@ -116,4 +114,10 @@ public class Death extends Algorithm {
     private Point findStart(Board current) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
+
+    @Override
+    public void endGame() {
+        waited = false;
+        powerPlayed = false;
+    }
 }
