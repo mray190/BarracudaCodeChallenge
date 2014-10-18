@@ -24,6 +24,8 @@ public class DeltaVolume extends Algorithm{
 
         //AI to wait / block / conquer
         //----------------------------------------------------------------------
+        if (current.getPlayerTokens()>1)
+            System.out.println("MORE TOKENS!!!!");
         //Null pointer safety
         if (legalMovesPlayer.isEmpty()) {
             return null;
@@ -42,7 +44,7 @@ public class DeltaVolume extends Algorithm{
             int deltaVolume = legalMovesPlayer.get(0).volumePlayer - legalMovesOpp.get(i).volumeOpp;
             
             //CONQUER: Player top volume > opponent top volume
-            if (deltaVolume > 0) {
+            if (deltaVolume >= 0) {
                 //Need more tokens
                 if (shouldWait(currentTokens, turn, deltaVolume)) {
                     return null;
@@ -68,6 +70,7 @@ public class DeltaVolume extends Algorithm{
 
     //False if NOT waiting for a token
     private boolean shouldWait(int currentTokens, int turn, int deltaVolume) {
+        
         //Early move, wait
         if (turn < 3){
             return true;

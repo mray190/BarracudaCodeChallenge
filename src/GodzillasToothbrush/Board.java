@@ -135,7 +135,6 @@ public class Board {
                 }
             }
         }
-        if(playerNum == game.player) System.out.println("Us: "+legalPoints.size()+" Them: "+game.legal_moves.length);
         return legalPoints;
     }    
 
