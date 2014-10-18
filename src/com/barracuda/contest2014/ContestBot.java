@@ -6,8 +6,6 @@ package com.barracuda.contest2014;
 
 import GodzillasToothbrush.Algorithms.AlgoDeath6969;
 import GodzillasToothbrush.Algorithms.Algorithm;
-import GodzillasToothbrush.Algorithms.ScoreWhoreAlgorithm;
-import GodzillasToothbrush.Algorithms.WeightedValueAlgorithm;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
 import com.barracuda.visualize.TerminalPrinter;
@@ -23,7 +21,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = new ScoreWhoreAlgorithm();
+        private static final Algorithm algorithm = new AlgoDeath6969();
         private boolean debug = false;
         
         private Board board;
@@ -118,7 +116,7 @@ public class ContestBot {
 		else if (message.type.equals("game_over")) {
 			//GameOverMessage g = (GameOverMessage)message;
 			//System.out.println(g);
-                        System.exit(69);
+                        //System.exit(69);
 			return null;
 		}
 		else if (message.type.equals("greetings_program")) {

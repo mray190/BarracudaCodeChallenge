@@ -21,10 +21,6 @@ public class AlgorithmHelper {
         return sort(points, new CompareScore());
     }
     
-    public static Point highestValue(ArrayList<Point> points){
-        return sort(points, new CompareWeightedValue());      
-    }
-    
     private static Point sort(ArrayList<Point> points, Comparator<Point> comp){
         if (points.isEmpty()) return null;
         Collections.sort(points, comp);
@@ -39,15 +35,6 @@ public class AlgorithmHelper {
         @Override
         public int compare(Point arg0, Point arg1) {
             return scoreOf(arg0) - scoreOf(arg1);
-        }
-        
-    }
-    
-    public static class CompareWeightedValue implements Comparator<Point>{
-
-        @Override
-        public int compare(Point o1, Point o2) {
-            return (int) (o1.calcValWeight() - o2.calcValWeight());
         }
         
     }
