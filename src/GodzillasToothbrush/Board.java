@@ -50,9 +50,48 @@ public class Board {
     public ArrayList<Layer> getBoard() {
         return layers;
     }
-    
+    //--------------------------------------------------------------------------
+
+    //Game State Information
+    //--------------------------------------------------------------------------    
     public int getMove() {
         return MAX_MOVES - game.moves_remaining;
+    }
+    
+    public ArrayList<Point> getLegalMoves(){
+        ArrayList<Point> legalMoves = new ArrayList<>();
+        
+        for (int[] move : game.legal_moves) {
+            //Convert to point
+            legalMoves.add(
+                    new Point(
+                            move[0], 
+                            move[1], 
+                            move[2], 
+                            game.board[move[0]][move[1]][move[2]]
+                    )
+            );
+        }
+        
+        return legalMoves;
+    }
+    
+    public boolean isValidMove(Point point){
+        return getLegalMoves().contains(point);
+    }
+    
+    public int getPlayerNum() {
+        return game.player;
+    }
+    
+    public int getOppNum() {
+        if (game.player==2)
+            return 1;
+        return 2;
+    }
+    
+    public boolean opponentWaited(Board previous){
+        return game.opponent_tokens > previous.game.opponent_tokens;
     }
     //--------------------------------------------------------------------------
 
@@ -66,8 +105,7 @@ public class Board {
     //Point System
     //--------------------------------------------------------------------------
     public int scoreOf(Point val){
-        int z = layersSize() - val.z;
-        return z*(z+1)*(z+2)/6;
+        return val.score();
     }
     //--------------------------------------------------------------------------    
 }
