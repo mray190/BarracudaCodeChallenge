@@ -1,9 +1,5 @@
 package GodzillasToothbrush;
 
-
-
-import java.util.ArrayList;
-
 /**
  *
  * @author Aaron
@@ -27,6 +23,10 @@ public class Point {
 
     //Default Object Functions
     //--------------------------------------------------------------------------
+    public int[] toMove(){
+        return new int[]{x, y, z};
+    }
+    
     @Override
     public String toString() {
         return new StringBuilder()

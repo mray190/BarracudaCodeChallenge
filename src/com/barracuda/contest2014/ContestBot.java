@@ -4,7 +4,9 @@
  */
 package com.barracuda.contest2014;
 
+import GodzillasToothbrush.Algorithms.Algorithm;
 import GodzillasToothbrush.Board;
+import GodzillasToothbrush.Point;
 import com.barracuda.visualize.TerminalPrinter;
 import java.io.IOException;
 
@@ -15,7 +17,15 @@ public class ContestBot {
 	private final int port;
 	private int game_id = -1;
 
+        //Godzilla Variables
+        //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
+        private static final Algorithm algorithm = null;
+        private boolean debug = true;
+        
+        private Board board;
+        private Board previousBoard;
+        //----------------------------------------------------------------------
         
 	public ContestBot(String host, int port) {
 		this.host = host;
@@ -66,27 +76,44 @@ public class ContestBot {
 		if (message.type.equals("request")) {
 			MoveRequestMessage m = (MoveRequestMessage)message;
                         
-                        Board board = new Board(m.state.board);
-                        
-			//System.out.println(m);
-                        printer.printDetails(m.state.board);
-                        
 			if (game_id != m.game_id) {
 				game_id = m.game_id;
 				System.out.println("new game " + game_id);
 			}
 
-			if (Math.random() < 0.5) {
-				return new PlayerWaitMessage(m.id);
-			}
-			else {
-				int i = (int)(Math.random() * m.state.legal_moves.length);
-				return new PlayerMoveMessage(m.id, m.state.legal_moves[i]);
-			}
+                        
+                        //Godzilla Logic
+                        //------------------------------------------------------    
+                        //Ensures move is valid
+                        if (debug){
+                            return new PlayerMoveMessage(m.id, m.state.legal_moves[0]);
+                        }
+                        
+                        //Print
+                        printer.printDetails(m.state.board);                        
+
+                        //Data Mine
+                        previousBoard = board;
+                        board = new Board(m.state.board, m.state);
+
+                        Point result = algorithm.makeMove(board, previousBoard);
+                        
+                        //Send Point to Server
+                        if (result == null){
+                            return new PlayerWaitMessage(m.id);
+                        }
+                        else{
+                            return new PlayerMoveMessage(m.id, result.toMove());
+                        }
+                        //------------------------------------------------------
 		}
 		else if (message.type.equals("move_result")) {
-			//ResultMessage r = (ResultMessage)message;
-			//System.out.println(r);
+			ResultMessage r = (ResultMessage)message;
+                        
+                        if (r.state.error != null || !r.state.error.equals("")){
+                            System.out.println(r);
+                            System.exit(69);
+                        }
 			return null;
 		}
 		else if (message.type.equals("game_over")) {
