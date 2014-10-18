@@ -14,12 +14,12 @@ public class Layer {
     //--------------------------------------------------------------------------    
     public Layer(int[][][] data, int z) {
         layer = new ArrayList<>();
-        
+
         int size = data.length;
 
         //Create Columns
         for (int y = 0; y < size - z; y++) {
-            
+
             //Create Rows
             ArrayList<Point> row = new ArrayList<>();
             for (int x = 0; x < size - z - y; x++) {
