@@ -4,6 +4,7 @@
  */
 package com.barracuda.contest2014;
 
+import GodzillasToothbrush.Algorithms.AlgoDeath6969;
 import GodzillasToothbrush.Algorithms.Algorithm;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
@@ -20,7 +21,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = null;
+        private static final Algorithm algorithm = new AlgoDeath6969();
         private boolean debug = true;
         
         private Board board;
