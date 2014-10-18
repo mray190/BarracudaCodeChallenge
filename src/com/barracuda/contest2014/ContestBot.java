@@ -21,8 +21,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = new AlgoDeath6969();
-        private boolean debug = false;
+        private static final Algorithm algorithm = new Death();
         
         private Board board;
         private Board previousBoard;
@@ -89,11 +88,6 @@ public class ContestBot {
                         //Print
                         //printer.printDetails(m.state.board);               
                         
-                        //Ensures move is valid
-                        if (debug){
-                            return new PlayerMoveMessage(m.id, m.state.legal_moves[0]);
-                        }         
-
                         //Data Mine
                         previousBoard = board;
                         board = new Board(m.state.board, m.state);
