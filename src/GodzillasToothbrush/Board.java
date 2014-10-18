@@ -91,9 +91,9 @@ public class Board {
     //Gets all squares that are below (within the triangle) of the parameter
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
-        for (int z = 0; z <= p.z; z++) {
-            for (int y = p.y; y < layers.size() - z; y++){
-                for (int x = p.x; x < layers.size() - z - y; x++){
+        for (int z = p.z; z >= 0; z--) {
+            for (int x = p.x; x <= p.x + p.z - z; x++){
+                for (int y = p.y; y <= p.y + p.z - z +p.x - x; y++){
                     points.add(get(x, y, z));
                 }
             }
@@ -120,7 +120,7 @@ public class Board {
         for (Point p: allPoints){
             //Valid tokens to access
             if (p.z < tokens){
-                int volume = countSpotsFree(getWaterfall(p), playerNum);
+                int volume = countSpotsFree(getWaterfall(p), playerNum, p);
                 
                 if (playerNum == game.player){
                     p.volumePlayer = volume;
@@ -135,13 +135,14 @@ public class Board {
                 }
             }
         }
-        
+        if(playerNum == game.player) System.out.println("Us: "+legalPoints.size()+" Them: "+game.legal_moves.length);
         return legalPoints;
     }    
 
     //Return -1 if not legal move    
-    public int countSpotsFree(ArrayList<Point> points, int playerNum) {
+    public int countSpotsFree(ArrayList<Point> points, int playerNum, Point parent) {
         int count = 0;
+        if(parent.data != 0) return -1;
         for (Point p : points) {
             if (p.data == 0){
                 count++;

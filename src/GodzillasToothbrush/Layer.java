@@ -18,11 +18,11 @@ public class Layer {
         int size = data.length;
 
         //Create Columns
-        for (int y = 0; y < size - z; y++) {
+        for (int x = 0; x < size - z; x++) {
 
             //Create Rows
             ArrayList<Point> row = new ArrayList<>();
-            for (int x = 0; x < size - z - y; x++) {
+            for (int y = 0; y < size - z - x; y++) {
                 row.add(new Point(x, y, z, data[x][y][z]));
             }
             layer.add(row);
