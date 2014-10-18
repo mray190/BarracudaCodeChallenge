@@ -90,4 +90,8 @@ public class DeltaVolume extends Algorithm{
         
         return Math.random() > 0.5;
     }    
+
+    @Override
+    public void endGame() {
+    }
 }
