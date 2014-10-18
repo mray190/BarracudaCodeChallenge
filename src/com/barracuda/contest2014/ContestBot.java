@@ -21,7 +21,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = new AlgoDeath6969();
+        private static final Algorithm algorithm = new Death();
         private boolean debug = false;
         
         private Board board;
