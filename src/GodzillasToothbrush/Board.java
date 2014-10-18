@@ -134,7 +134,12 @@ public class Board {
 
             @Override
             public int compare(Point o1, Point o2) {
-                return countSpotsBottom(o2) - countSpotsBottom(o1);
+                //Size of free bottom layer
+                int diff = countSpotsBottom(o2) - countSpotsBottom(o1);
+                if (diff != 0) return diff;
+                
+                //Side length of the bottom
+                return o2.z - o1.z;
             }
             
         });
