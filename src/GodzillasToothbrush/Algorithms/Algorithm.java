@@ -44,9 +44,16 @@ public abstract class Algorithm {
     public static class MasterCompare implements Comparator<Point> {
 
         private final boolean isPlayer;
-        
+        private final Point firstMove;
+
         public MasterCompare(boolean isPlayer){
             this.isPlayer = isPlayer;
+            this.firstMove = null;
+        }
+        
+        public MasterCompare(boolean isPlayer, Point firstMove){
+            this.isPlayer = isPlayer;
+            this.firstMove = firstMove;
         }
         
         //Normally returns negative when lhs < rhs
@@ -65,8 +72,8 @@ public abstract class Algorithm {
             
             //When the max scores are equal, new logic:
             //Points closer to the middle are better
-            if (rhs.scoreMiddle() > lhs.scoreMiddle()) return 1;
-            else if (rhs.scoreMiddle() < lhs.scoreMiddle()) return -1;
+            if (rhs.scoreMiddle(firstMove) > lhs.scoreMiddle(firstMove)) return 1;
+            else if (rhs.scoreMiddle(firstMove) < lhs.scoreMiddle(firstMove)) return -1;
             else return 0;
         }
 

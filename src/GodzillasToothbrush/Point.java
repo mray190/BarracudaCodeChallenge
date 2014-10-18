@@ -45,13 +45,17 @@ public class Point {
         Point middle = new Point(2, 2, z, -1);
         
         //Gets distance
-        return distanceTo(middle);
+        return scoreMiddle(middle);
+    }
+    
+    public double scoreMiddle(Point center){
+        if (center == null) return scoreMiddle();
+        return distanceTo(center);
     }
     
     public double distanceTo(Point other){
         return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
     }
-    
     //--------------------------------------------------------------------------
 
     
