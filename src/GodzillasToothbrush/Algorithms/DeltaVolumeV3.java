@@ -92,6 +92,7 @@ public class DeltaVolumeV3 extends Algorithm {
                 //If we can't block the opponent, wait to get a token
                 else if (deltaVolume < -7) {
                     for (int i = 0; i < legalMovesOpp.size(); i++) {
+                        if (true) return update(legalMovesPlayer.get(0));
                         Point move = current.cockblock(legalMovesPlayer, legalMovesOpp.get(i));
                         if (move != null) {
                             return update(move);
