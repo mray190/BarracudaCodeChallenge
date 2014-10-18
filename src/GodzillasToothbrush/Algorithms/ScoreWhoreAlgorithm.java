@@ -11,6 +11,10 @@ public class ScoreWhoreAlgorithm extends Algorithm {
 
     @Override
     public Point makeMove(Board current, Board previous) {
+        if (current.opponentWaited(previous)){
+            return null;
+        }
+        
         return AlgorithmHelper.highestScore(current.getLegalMoves());
     }
     

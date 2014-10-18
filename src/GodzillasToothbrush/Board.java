@@ -89,6 +89,10 @@ public class Board {
             return 1;
         return 2;
     }
+    
+    public boolean opponentWaited(Board previous){
+        return game.opponent_tokens > previous.game.opponent_tokens;
+    }
     //--------------------------------------------------------------------------
 
     //Sizes
