@@ -78,5 +78,14 @@ public abstract class Algorithm {
         }
 
     }
+    
+    public static class FrequencyCompare implements Comparator<Point>{
+
+        @Override
+        public int compare(Point o1, Point o2) {
+            return o2.frequency - o1.frequency;
+        }
+        
+    }
     //--------------------------------------------------------------------------    
 }
