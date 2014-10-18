@@ -95,8 +95,8 @@ public class Board {
     public ArrayList<Point> getWaterfall(Point p) {
         ArrayList<Point> points = new ArrayList<>();
         for (int z = 0; z <= p.z; z++) {
-            for (int x = p.x; x < layers.size() - z - p.y; x++) {
-                for (int y = p.y; y < layers.size() - z - p.x; y++) {
+            for (int y = p.y; y < layers.size() - z; y++){
+                for (int x = p.x; x < layers.size() - z - y; x++){
                     points.add(get(x, y, z));
                 }
             }
