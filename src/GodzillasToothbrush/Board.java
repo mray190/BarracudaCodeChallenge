@@ -54,61 +54,75 @@ public class Board {
 
     //Game State Information
     //--------------------------------------------------------------------------    
-    public int getMove() {
+    public int getTurnIndex() {
         return MAX_MOVES - game.moves_remaining;
     }
-    
-    public ArrayList<Point> getLegalMoves(){
-        ArrayList<Point> legalMoves = new ArrayList<>();
-        
-        for (int[] move : game.legal_moves) {
-            //Convert to point
-            legalMoves.add(
-                    new Point(
-                            move[0], 
-                            move[1], 
-                            move[2], 
-                            game.board[move[0]][move[1]][move[2]]
-                    )
-            );
-        }
-        
-        return legalMoves;
-    }
-    
-    public boolean isValidMove(Point point){
+
+    public boolean isValidMove(Point point) {
         return getLegalMoves().contains(point);
     }
-    
+
     public int getPlayerNum() {
         return game.player;
     }
-    
+
     public int getOppNum() {
-        if (game.player==2)
+        if (game.player == 2) {
             return 1;
+        }
         return 2;
     }
-    
+
     public int getPlayerTokens() {
         return game.tokens;
     }
+
+    public int getOppTokens(){
+        return game.opponent_tokens;
+    }
     
-    public boolean opponentWaited(Board previous){
+    public boolean didOppWait(Board previous) {
         return game.opponent_tokens > previous.game.opponent_tokens;
     }
     //--------------------------------------------------------------------------
 
-    //Sizes
-    //--------------------------------------------------------------------------    
-    public int layersSize(){
-        return layers.size();
-    }
+    //TODO
     //--------------------------------------------------------------------------
-   
+    public ArrayList<Point> getWaterfall(Point p) {
+        return null;
+    }
+    
+    public ArrayList<Point> getLegalMoves() {
+        ArrayList<Point> legalMoves = new ArrayList<>();
+
+        for (int[] move : game.legal_moves) {
+            //Convert to point
+            legalMoves.add(
+                    new Point(
+                            move[0],
+                            move[1],
+                            move[2],
+                            game.board[move[0]][move[1]][move[2]]
+                    )
+            );
+        }
+
+        return legalMoves;
+    }
+    
+    public ArrayList<Point> getOppLegalMoves() {
+        return null;
+    }    
+
+    //Return -1 if not legal move    
+    public int countSpotsFree(ArrayList<Point> x, int playerNum) {
+        return -1;
+    }    
+    //--------------------------------------------------------------------------
+
     //Point System
     //--------------------------------------------------------------------------
-    public int scoreOf(Point val){
+    public int scoreOf(Point val) {
         return val.score();
     }
     //--------------------------------------------------------------------------    

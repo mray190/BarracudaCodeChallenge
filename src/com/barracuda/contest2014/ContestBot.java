@@ -89,11 +89,6 @@ public class ContestBot {
                         //Print
                         //printer.printDetails(m.state.board);               
                         
-                        //Ensures move is valid
-                        if (debug){
-                            return new PlayerMoveMessage(m.id, m.state.legal_moves[0]);
-                        }         
-
                         //Data Mine
                         previousBoard = board;
                         board = new Board(m.state.board, m.state);
