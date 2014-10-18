@@ -1,5 +1,8 @@
 package GodzillasToothbrush;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 /**
  *
  * @author Aaron
@@ -30,6 +33,11 @@ public class Point {
     
     public int score(){
         return z*(z+1)*(z+2)/6;        
+    }
+    
+    public double calcValWeight() {
+        int size = 10 - z;
+        return z+(size-sqrt(pow(x,2.0)+pow(y,2.0))/size);
     }
     //--------------------------------------------------------------------------
 

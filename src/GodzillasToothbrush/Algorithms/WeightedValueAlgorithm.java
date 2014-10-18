@@ -11,7 +11,11 @@ public class WeightedValueAlgorithm extends Algorithm{
 
     @Override
     public Point makeMove(Board current, Board previous) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (current.opponentWaited(previous)){
+            return null;
+        }
+        
+        return AlgorithmHelper.highestValue(current.getLegalMoves());        
     }
     
 }
