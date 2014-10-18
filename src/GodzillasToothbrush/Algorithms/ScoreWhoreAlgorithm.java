@@ -21,5 +21,4 @@ public class ScoreWhoreAlgorithm extends Algorithm {
         
         return AlgorithmHelper.highestScore(current.getLegalMoves());
     }
-    
 }
