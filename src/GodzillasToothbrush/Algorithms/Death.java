@@ -18,8 +18,7 @@ public class Death extends Algorithm {
     boolean waited, powerPlayed;
     
     public Death() {
-        waited = false;
-        powerPlayed = false;
+        endGame();
     }
     
     @Override
@@ -116,4 +115,10 @@ public class Death extends Algorithm {
     private Point findStart(Board current) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
+
+    @Override
+    public void endGame() {
+        waited = false;
+        powerPlayed = false;
+    }
 }
