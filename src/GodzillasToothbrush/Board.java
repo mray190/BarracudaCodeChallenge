@@ -54,6 +54,16 @@ public class Board {
     public int getMove() {
         return MAX_MOVES - game.moves_remaining;
     }
+    
+    public int getPlayerNum() {
+        return game.player;
+    }
+    
+    public int getOppNum() {
+        if (game.player==2)
+            return 1;
+        return 2;
+    }
     //--------------------------------------------------------------------------
 
     //Sizes
