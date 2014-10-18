@@ -14,7 +14,7 @@ public class TerminalPrinter extends Printer<Void> {
     
     @Override
     protected Void print(int[][][] grid, boolean details) {
-        printer.print(grid, details);
+        System.out.println(printer.print(grid, details));
         return null;
     }
 }
