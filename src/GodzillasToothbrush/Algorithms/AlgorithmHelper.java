@@ -2,6 +2,7 @@ package GodzillasToothbrush.Algorithms;
 
 import GodzillasToothbrush.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -17,15 +18,17 @@ public class AlgorithmHelper {
     public static Point highestScore(ArrayList<Point> points){
         if (points.isEmpty()) return null;
         
-        points.sort(new Comparator<Point>(){
+        Collections.sort(points, new CompareScore());
 
-            @Override
-            public int compare(Point o1, Point o2) {
-                return scoreOf(o2) - scoreOf(o1);
-            }
-            
-        });
-        
         return points.get(0);
+    }
+    
+    public static class CompareScore implements Comparator<Point>{
+
+        @Override
+        public int compare(Point arg0, Point arg1) {
+            return scoreOf(arg1) - scoreOf(arg0);
+        }
+        
     }
 }

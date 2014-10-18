@@ -7,7 +7,7 @@ import GodzillasToothbrush.Point;
  *
  * @author Aaron
  */
-public class ScoreWhoreAlgorithm extends Algorithm{
+public class ScoreWhoreAlgorithm extends Algorithm {
 
     @Override
     public Point makeMove(Board current, Board previous) {
