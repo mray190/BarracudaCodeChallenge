@@ -5,7 +5,7 @@
 package com.barracuda.contest2014;
 
 import GodzillasToothbrush.Algorithms.Algorithm;
-import GodzillasToothbrush.Algorithms.DeltaVolume;
+import GodzillasToothbrush.Algorithms.DeltaVolumeV2;
 import GodzillasToothbrush.Board;
 import GodzillasToothbrush.Point;
 import com.barracuda.visualize.TerminalPrinter;
@@ -21,7 +21,7 @@ public class ContestBot {
         //Godzilla Variables
         //----------------------------------------------------------------------
         private static final TerminalPrinter printer = new TerminalPrinter();
-        private static final Algorithm algorithm = new DeltaVolume();
+        private static final Algorithm algorithm = new DeltaVolumeV2();
         private boolean debug = false;
         
         private Board board;
